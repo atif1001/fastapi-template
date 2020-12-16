@@ -8,8 +8,8 @@ async def health_check():
     return {'online': 'true'}
 
 
-@router.get('/health-check/details')
-async def health_check_details():
+@router.get('/health-check/dependencies')
+async def health_check_dependencies():
 
     response = {
         'online': True,
