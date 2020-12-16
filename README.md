@@ -12,10 +12,11 @@ This codebase provides a basic structure to create an API micro-service using Fa
 `source venv_1_fastapi_template/bin/activate`
 
 ## Install Fast API & Server
-`pip install fastapi uvicorn flake8 python-multipart`
+To install latest versions: `pip install fastapi uvicorn flake8 python-multipart`
 
-# Configuration
-`pip freeze > requirements.txt`
+or install exact versions at time of development: `pip install -r requirements.txt`
+
+To generate pip requirements file: `pip freeze > requirements.txt`
 
 # Usage
 ## Start server
