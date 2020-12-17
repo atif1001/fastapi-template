@@ -4,6 +4,7 @@ from functools import lru_cache
 from pydantic import BaseSettings
 
 
+# Load config settings
 class Settings(BaseSettings):
     app_name: str = 'FastAPI Template'
     environment: str
@@ -13,7 +14,7 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 
-# Loading config settings
+# Use caching for config settings
 @lru_cache()
 def get_settings():
     return Settings()
