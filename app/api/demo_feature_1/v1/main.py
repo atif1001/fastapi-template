@@ -5,8 +5,10 @@ from fastapi import APIRouter, HTTPException, responses, status
 from .models import CreateRequestModel, CreateResponseModel, UpdateResponseModel, ErrorResponseModel
 from ...libs.responses import error_response
 from .data import dummy_data
+from app.config import get_settings
 
 router = APIRouter()
+config = get_settings()
 
 
 @router.get('/demo-feature-1')
@@ -50,7 +52,8 @@ async def create(payload: CreateRequestModel):
 
 @router.get('/demo-feature-1/{feature_id}')
 async def read(feature_id: str):
-    return feature_id
+    response_data = f' App named [{config.app_name}] got the value: {feature_id}'
+    return response_data
 
 
 @router.put('/demo-feature-1/{feature_id}', response_model=UpdateResponseModel)
