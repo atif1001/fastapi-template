@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, responses, status
 
 from app.config import get_settings
 from app.libs.logging import logger
-from app.api.libs.responses import error_response
+from app.libs.responses import error_response
 from app.api.demo_feature_1.v1.models import (
     CreateRequestModel,
     CreateResponseModel,

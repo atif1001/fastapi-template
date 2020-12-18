@@ -13,7 +13,7 @@ This codebase provides a basic structure to create an API micro-service using Fa
 `source venv_1_fastapi_template/bin/activate`
 
 ## Install Fast API & Server
-To install latest versions: `pip install fastapi uvicorn flake8 python-multipart python-dotenv`
+To install latest versions: `pip install fastapi uvicorn flake8 python-multipart python-dotenv loguru`
 
 OR 
 
