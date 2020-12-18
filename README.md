@@ -31,12 +31,11 @@ To generate pip requirements file: `pip freeze > requirements.txt`
 
 # Usage
 
-## Start server
-Inside the `app` directory execute the following command to start server pointing to the module `main` and object `app`:
+## Start App
+Inside the root of this directory
 
-`cd app`
-
-`uvicorn main:app --reload` 
+`make start`
+which executes `python app/main.py`
 
 ## API Documentation Swagger & ReDoc
 Once server is started, API docs can be found at:

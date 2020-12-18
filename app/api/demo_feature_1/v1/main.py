@@ -2,10 +2,17 @@ import traceback
 
 from fastapi import APIRouter, HTTPException, responses, status
 
-from .models import CreateRequestModel, CreateResponseModel, UpdateResponseModel, ErrorResponseModel
-from ...libs.responses import error_response
-from .data import dummy_data
 from app.config import get_settings
+from app.libs.logging import logger
+from app.api.libs.responses import error_response
+from app.api.demo_feature_1.v1.models import (
+    CreateRequestModel,
+    CreateResponseModel,
+    UpdateResponseModel,
+    ErrorResponseModel
+)
+from app.api.demo_feature_1.v1.data import dummy_data
+
 
 router = APIRouter()
 config = get_settings()
@@ -13,7 +20,10 @@ config = get_settings()
 
 @router.get('/demo-feature-1')
 async def list():
-    return dummy_data
+    try:
+        return dummy_data
+    except Exception:
+        logger.exception('Exception: ')
 
 
 @router.post(
@@ -45,23 +55,32 @@ async def create(payload: CreateRequestModel):
 
         return body_data
 
-    except Exception as e:
-        print(f'Error: {e} \n {traceback.format_exc()}')
+    except Exception:
+        logger.exception('Exception: ')
         return error_response('SERVER_ERROR', traceback.format_exc())
 
 
 @router.get('/demo-feature-1/{feature_id}')
 async def read(feature_id: str):
-    response_data = f' App named [{config.app_name}] got the value: {feature_id}'
-    return response_data
+    try:
+        response_data = f' App named [{config.APP_NAME}] got the value: {feature_id}'
+        return response_data
+    except Exception:
+        logger.exception('Exception: ')
 
 
 @router.put('/demo-feature-1/{feature_id}', response_model=UpdateResponseModel)
 async def update(feature_id: str, payload: CreateRequestModel):
-    response_data = {'message': f'Updating record: {feature_id} -> {payload}'}
-    return response_data
+    try:
+        response_data = {'message': f'Updating record: {feature_id} -> {payload}'}
+        return response_data
+    except Exception:
+        logger.exception('Exception: ')
 
 
 @router.delete('/demo-feature-1/{feature_id}')
 async def delete():
-    return dummy_data
+    try:
+        return dummy_data
+    except Exception:
+        logger.exception('Exception: ')

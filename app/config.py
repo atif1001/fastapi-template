@@ -6,9 +6,9 @@ from pydantic import BaseSettings
 
 # Load config settings
 class Settings(BaseSettings):
-    app_name: str = 'FastAPI Template'
-    environment: str
-    admin_email: Optional[str]
+    ENVIRONMENT: str
+    APP_NAME: str = 'FastAPI Template'
+    PORT: int
 
     class Config:
         env_file = ".env"
