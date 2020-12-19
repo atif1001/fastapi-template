@@ -13,11 +13,11 @@ This codebase provides a basic structure to create an API micro-service using Fa
 `source venv_1_fastapi_template/bin/activate`
 
 ## Install Fast API & Server
-To install latest versions: `pip install fastapi uvicorn flake8 python-multipart python-dotenv loguru`
+To install latest versions: `pip install fastapi uvicorn flake8 python-multipart python-dotenv loguru "python-jose[cryptography]" "passlib[bcrypt]"`
 
 OR 
 
-install exact versions at time of development: `pip install -r requirements.txt`
+to install the versions at time of development: `pip install -r requirements.txt`
 
 Pip install this app itself: `pip install -e .`
 *This required to support importing python root level package. Using command above we are installing this app in editable state in the root folder using dot (.)*

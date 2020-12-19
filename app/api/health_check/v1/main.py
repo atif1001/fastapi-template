@@ -1,4 +1,8 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+
+from app.api.auth.v1.main import get_current_active_user
+from app.api.auth.v1.models import (User)
+
 
 router = APIRouter()
 
@@ -9,7 +13,7 @@ async def health_check():
 
 
 @router.get('/health-check/dependencies')
-async def health_check_dependencies():
+async def health_check_dependencies(current_user: User = Depends(get_current_active_user)):
 
     response = {
         'online': True,

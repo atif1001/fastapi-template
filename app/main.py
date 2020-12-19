@@ -30,7 +30,7 @@ else:
     uv_debug = 'False'
 
 if __name__ == "__main__":
-    logger.debug("FasAPI Template")
+    logger.debug(config.APP_NAME)
     uvicorn.run("main:app",
                 host='0.0.0.0',
                 port=config.PORT,

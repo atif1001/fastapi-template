@@ -1,9 +1,11 @@
 import traceback
 
-from fastapi import APIRouter, HTTPException, responses, status
+from fastapi import APIRouter, responses, status, Depends
 
 from app.config import get_settings
 from app.libs.logging import logger
+from app.api.auth.v1.main import get_current_active_user
+from app.api.auth.v1.models import (User)
 from app.libs.responses import error_response
 from app.api.demo_feature_1.v1.models import (
     CreateRequestModel,
@@ -19,7 +21,7 @@ config = get_settings()
 
 
 @router.get('/demo-feature-1')
-async def list():
+def list(current_user: User = Depends(get_current_active_user)):
     try:
         return dummy_data
     except Exception:
@@ -30,14 +32,16 @@ async def list():
     '/demo-feature-1',
     summary='Create a new record',
     response_model=CreateResponseModel,
-    responses={406: {'model': ErrorResponseModel}},
+    responses={
+        406: {'model': ErrorResponseModel}
+        }
     # response_description="Success Response"
 )
-async def create(payload: CreateRequestModel):
+def create(payload: CreateRequestModel, current_user: User = Depends(get_current_active_user)):
     """
-    Create a new record, age range allowed is 18 - 150
+    Create a new record. Age parameter can be from 18 to 150.
 
-    Additional description in markdown format, shown in swagger docs.
+    Additional description shown in swagger docs. (Markdown format allowed.)
     - **name**: Limted to 100 characters
     - **age**: Age from 18 to 150
     """
@@ -61,7 +65,7 @@ async def create(payload: CreateRequestModel):
 
 
 @router.get('/demo-feature-1/{feature_id}')
-async def read(feature_id: str):
+def read(feature_id: str, current_user: User = Depends(get_current_active_user)):
     try:
         response_data = f' App named [{config.APP_NAME}] got the value: {feature_id}'
         return response_data
@@ -70,7 +74,7 @@ async def read(feature_id: str):
 
 
 @router.put('/demo-feature-1/{feature_id}', response_model=UpdateResponseModel)
-async def update(feature_id: str, payload: CreateRequestModel):
+def update(feature_id: str, payload: CreateRequestModel, current_user: User = Depends(get_current_active_user)):
     try:
         response_data = {'message': f'Updating record: {feature_id} -> {payload}'}
         return response_data
@@ -79,7 +83,7 @@ async def update(feature_id: str, payload: CreateRequestModel):
 
 
 @router.delete('/demo-feature-1/{feature_id}')
-async def delete():
+def delete(current_user: User = Depends(get_current_active_user)):
     try:
         return dummy_data
     except Exception:

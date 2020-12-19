@@ -5,6 +5,14 @@ class CreateRequestModel(BaseModel):
     name: str
     age: int = Field(ge=18, le=150)
 
+    class Config:
+        schema_extra = {
+            'example': {
+                'name': 'bob',
+                'age': 33
+            }
+        }
+
 
 class CreateResponseModel(BaseModel):
     record_id: int
