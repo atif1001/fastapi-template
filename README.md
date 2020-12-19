@@ -27,6 +27,8 @@ To generate pip requirements file: `pip freeze > requirements.txt`
 
 # Configuration
 - Copy `.env-SAMPLE` file to `.env` and populate values.
+- Update value for `SECRET_KEY` in `.env` file.
+- Update username/passwords for `AUTHORIZED_USERS` in `.env` file.
 
 
 # Usage
