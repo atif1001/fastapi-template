@@ -29,7 +29,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/token")
 
 def get_authorized_users():
     authorized_users = ast.literal_eval(config.AUTHORIZED_USERS)
-    logger.debug(authorized_users)
     return authorized_users
 
 
